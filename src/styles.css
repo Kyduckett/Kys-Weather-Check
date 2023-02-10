@@ -6,7 +6,7 @@ body {
   max-width: 800px;
   display: block;
   margin: 0 auto;
-  margin-top: 35px;
+  margin-top: 100px;
   border-radius: 10px;
 }
 .title {
@@ -15,6 +15,12 @@ body {
   margin-top: 10px;
   font-family: "DM Serif Display", serif;
   font-size: 48px;
+  color: saddlebrown;
+}
+.todaysImg img {
+  max-width: 180px;
+  max-height: 180px;
+  margin-left: 150px;
 }
 .display {
   display: block;
@@ -27,9 +33,17 @@ body {
   text-align: center;
 }
 .currentLocationButton {
-  display: block;
-  margin: 0 auto;
   text-align: center;
   border: black;
   background: white;
+}
+.weekAheadView {
+  margin-top: 10%;
+  margin-left: 10px;
+}
+
+p {
+  text-align: center;
+  font-family: "DM Serif Display", serif;
+  color: saddlebrown;
 }
