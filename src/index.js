@@ -12,7 +12,13 @@ function formateDate() {
   ];
   let day = days[now.getDay()];
   let hours = now.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
   let min = now.getMinutes();
+  if (min < 10) {
+    min = `0${min}`;
+  }
   let currentDate = `${day} ${hours}:${min}`;
 
   return currentDate;
