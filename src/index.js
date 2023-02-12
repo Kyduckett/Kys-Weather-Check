@@ -72,6 +72,8 @@ function showWeather(response) {
   let temp = Math.round(response.data.main.temp);
   userLocation.innerHTML = `${response.data.name}`;
   userTemp.innerHTML = `${temp}°`;
+  userHumid.innerHTML = `Humidity : ${response.data.main.humidity}%`;
+  userWind.innerHTML = `Wind Speed: ${response.data.wind.speed}mph`;
 }
 
 function showPosition(position) {
@@ -85,4 +87,6 @@ function showPosition(position) {
 navigator.geolocation.getCurrentPosition(showPosition);
 let userLocation = document.querySelector("#current-location-header");
 let userTemp = document.querySelector("#current-temp");
+let userHumid = document.querySelector("#current-humidity");
+let userWind = document.querySelector("#current-windspeed");
 userLocation.addEventListener("click", showPosition);
