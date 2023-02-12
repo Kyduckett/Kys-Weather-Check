@@ -54,11 +54,16 @@ function showWeather(response) {
   let hum = Math.round(response.data.main.humidity);
   let speed = Math.round(response.data.wind.speed);
   let descriptionElement = response.data.weather[0].description;
+  let iconElement = document.querySelector("#icon");
   userLocation.innerHTML = `${response.data.name}`;
   userTemp.innerHTML = `${temp}°`;
   userHumid.innerHTML = `Humidity: ${hum}%`;
   userWind.innerHTML = `Wind Speed: ${speed} Km/H`;
   weatherConditon.innerHTML = `${descriptionElement}`;
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 // Gather Position
 function showPosition(position) {
