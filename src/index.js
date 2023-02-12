@@ -22,6 +22,19 @@ currentDateDisplay.innerHTML = `${formateDate(now)}`;
 function userEntry() {
   event.preventDefault();
   searched.innerHTML = `${searching.value}`;
+  axios.get(cityapiUrl).then(citySearch);
+
+}
+function citySearch(response){
+   let apiKey = "c93e97809431cb4a1503908d50079963";
+    let cityapiUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${searching.value},&limit=5&appid=${apiKey}`;
+    let searchedTemp = response.data.main.temp;
+    let searchedHum = response.data.main.humidity;
+    let searchedWind = response.data.wind.speed;
+    userTemp.innerHTML = `${searchedTemp}°`;
+    userHumid.innerHTML = `Humidity :${searchedHum}%`;
+    userWind.innerHTML = `Wind Speed:${searchedWind} Km/H`;
+
 }
 
 let searching = document.querySelector("#city-input");
@@ -32,10 +45,12 @@ userSearch.addEventListener("submit", userEntry);
 
 function showWeather(response) {
   let temp = Math.round(response.data.main.temp);
+  let hum = Math.round(response.data.main.humidity);
+  let speed = Math.round(response.data.wind.speed);
   userLocation.innerHTML = `${response.data.name}`;
   userTemp.innerHTML = `${temp}°`;
-  userHumid.innerHTML = `Humidity : ${response.data.main.humidity}%`;
-  userWind.innerHTML = `Wind Speed: ${response.data.wind.speed}mph`;
+  userHumid.innerHTML = `Humidity :${hum}%`;
+  userWind.innerHTML = `Wind Speed:${speed} Km/H`;
 }
 
 function showPosition(position) {
@@ -52,3 +67,5 @@ let userTemp = document.querySelector("#current-temp");
 let userHumid = document.querySelector("#current-humidity");
 let userWind = document.querySelector("#current-windspeed");
 userLocation.addEventListener("click", showPosition);
+
+
