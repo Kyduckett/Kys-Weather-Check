@@ -20,6 +20,7 @@ function formateDate() {
 currentDateDisplay.innerHTML = `${formateDate(now)}`;
 
 function userEntry() {
+  event.preventDefault();
   searched.innerHTML = `${searching.value}`;
 }
 
@@ -38,10 +39,10 @@ function showWeather(response) {
 }
 
 function showPosition(position) {
-  let apiKey = "a90ac0f0b0448oc3f53c03t382594470";
+  let apiKey = "c93e97809431cb4a1503908d50079963";
   let long = position.coords.longitude;
   let lati = position.coords.latitude;
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${long}&lat=${lati}&key=${apiKey}&units=imperial`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(showWeather);
 }
 
