@@ -1,9 +1,14 @@
 body {
-  background: azure;
+  background: linear-gradient(
+    89deg,
+    rgb(21, 74, 189) 0.1%,
+    rgb(26, 138, 211) 51.5%,
+    rgb(72, 177, 234) 100.2%
+  );
 }
 .page {
   background: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
-  max-width: 800px;
+  max-width: 1000px;
   display: block;
   margin: 0 auto;
   margin-top: 100px;
