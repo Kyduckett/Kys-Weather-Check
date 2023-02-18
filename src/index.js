@@ -55,7 +55,7 @@ function showWeather(response) {
   let humidElement = document.querySelector("#current-humidity");
   let windElement = document.querySelector("#current-windspeed");
 
-  let fahrenheitTemp = Math.round(response.data.main.temp);
+  fahrenheitTemp = Math.round(response.data.main.temp);
 
   currentDate.innerHTML = formateDate(response.data.dt * 1000);
   locationElement.innerHTML = `${response.data.name}`;
@@ -69,7 +69,7 @@ function showWeather(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
-  //showPosition(response.data.coords);
+  showPosition(response.data.coords);
 }
 
 function citySearch(city) {
@@ -83,7 +83,27 @@ function userEntry(event) {
   let searching = document.querySelector("#city-input");
   citySearch(searching.value);
 }
-citySearch("Dallas");
+
+function celFormula(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temp");
+  let celciusTemp = Math.round(((fahrenheitTemp - 32) * 5) / 9);
+  tempElement.innerHTML = `${celciusTemp}°`;
+}
 
 let userSearch = document.querySelector("#search-bar");
 userSearch.addEventListener("submit", userEntry);
+
+let fahrenheitTemp = null;
+
+//function fahrFormula(){
+
+//}
+
+let celciusButton = document.querySelector("#cel-button");
+celciusButton.addEventListener("click", celFormula);
+
+//let fahrenheitButton = document.querySelector("#fahr-button");
+//fahrenheitButton.addEventListener("click",fahrFormula);
+
+citySearch("Dallas");
