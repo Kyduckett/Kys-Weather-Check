@@ -90,18 +90,23 @@ function celFormula(event) {
   let celciusTemp = Math.round(((fahrenheitTemp - 32) * 5) / 9);
   tempElement.innerHTML = `${celciusTemp}°`;
 }
-
+function fahrFormula(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temp");
+  let farhTemp = Math.round((celciusTemp * 9) / 5 + 32);
+  tempElement.innerHTML = `${farhTemp}°`;
+}
 let userSearch = document.querySelector("#search-bar");
 userSearch.addEventListener("submit", userEntry);
 
 let fahrenheitTemp = null;
-
-//function fahrFormula(){
-
-//}
+let celciusTemp = null;
 
 let celciusButton = document.querySelector("#cel-button");
 celciusButton.addEventListener("click", celFormula);
+
+let fahrenheitButton = document.querySelector("#fahr-button");
+fahrenheitButton.addEventListener("click", fahrFormula);
 
 //let fahrenheitButton = document.querySelector("#fahr-button");
 //fahrenheitButton.addEventListener("click",fahrFormula);
