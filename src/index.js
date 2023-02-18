@@ -93,14 +93,12 @@ function celFormula(event) {
 function fahrFormula(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#current-temp");
-  let farhTemp = Math.round((celciusTemp * 9) / 5 + 32);
-  tempElement.innerHTML = `${farhTemp}°`;
+  tempElement.innerHTML = `${fahrenheitTemp}°`;
 }
 let userSearch = document.querySelector("#search-bar");
 userSearch.addEventListener("submit", userEntry);
 
 let fahrenheitTemp = null;
-let celciusTemp = null;
 
 let celciusButton = document.querySelector("#cel-button");
 celciusButton.addEventListener("click", celFormula);
