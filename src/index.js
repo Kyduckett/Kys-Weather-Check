@@ -30,7 +30,6 @@ function formateDate(timestamp) {
 //userLocation.addEventListener("click", showPosition);
 
 //Beginning of Edits---------------------
-//function displayForcast(response) {}
 
 // Gather Position
 function showPosition(corrdinates) {
@@ -39,6 +38,36 @@ function showPosition(corrdinates) {
   let lati = position.coords.latitude;
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForcast);
+}
+
+//forecast
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Sun", "Mon", "Tuse", "Wed"];
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `  
+              <div class="col-2">
+                <div class="weather-forecast-date">${day}</div>
+                <img
+                  src="http://openweathermap.org/img/wn/50d@2x.png"
+                  alt=""
+                  width="42"
+                />
+                <div class="weather-forecast-temperatures">
+                  <span class="weather-forecast-temperature-max"> 18° </span>
+                  <span class="weather-forecast-temperature-min"> 12° </span>
+                </div>
+              </div>
+            
+          `;
+  });
+
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 //Current Location Display
@@ -106,7 +135,6 @@ celciusButton.addEventListener("click", celFormula);
 let fahrenheitButton = document.querySelector("#fahr-button");
 fahrenheitButton.addEventListener("click", fahrFormula);
 
-//let fahrenheitButton = document.querySelector("#fahr-button");
-//fahrenheitButton.addEventListener("click",fahrFormula);
 
 citySearch("Dallas");
+displayForecast();
