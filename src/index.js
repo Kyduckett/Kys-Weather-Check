@@ -24,50 +24,64 @@ function formateDate(timestamp) {
 
   return currentDate;
 }
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-// Reorganizing Search Area-------------------------------------
-//navigator.geolocation.getCurrentPosition(showPosition);
-//userLocation.addEventListener("click", showPosition);
-
-//Beginning of Edits---------------------
-
-// Gather Position
-function showPosition(corrdinates) {
-  let apiKey = "c93e97809431cb4a1503908d50079963";
-  let long = position.coords.longitude;
-  let lati = position.coords.latitude;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(displayForcast);
+  return days[day];
 }
 
-//forecast
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
-  let days = ["Sun", "Mon", "Tuse", "Wed"];
-  let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `  
-              <div class="col-2">
-                <div class="weather-forecast-date">${day}</div>
-                <img
-                  src="http://openweathermap.org/img/wn/50d@2x.png"
-                  alt=""
-                  width="42"
-                />
-                <div class="weather-forecast-temperatures">
-                  <span class="weather-forecast-temperature-max"> 18° </span>
-                  <span class="weather-forecast-temperature-min"> 12° </span>
-                </div>
-              </div>
-            
-          `;
-  });
+// Gather Position
+//function showPosition(corrdinates) {
+//let apiKey = "c93e97809431cb4a1503908d50079963";
+//let long = position.coords.longitude;
+//let lati = position.coords.latitude;
+//let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=${apiKey}&units=imperial`;
+//axios.get(apiUrl).then(displayForecast);
+//}
 
+//forecast
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="col-2">
+        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <img
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="42"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-temperature-max"> ${Math.round(
+            forecastDay.temp.max
+          )}° </span>
+          <span class="weather-forecast-temperature-min"> ${Math.round(
+            forecastDay.temp.min
+          )}° </span>
+        </div>
+      </div>
+  `;
+    }
+  });
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "73a00877081bd43422bdee0f3022beb5";
+  let forecastApi = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+  console.log(forecastApi);
+  axios.get(forecastApi).then(displayForecast);
 }
 
 //Current Location Display
@@ -98,11 +112,11 @@ function showWeather(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
-  showPosition(response.data.coords);
+  getForecast(response.data.coord);
 }
 
 function citySearch(city) {
-  let apiKey = "c93e97809431cb4a1503908d50079963";
+  let apiKey = "73a00877081bd43422bdee0f3022beb5";
   let cityapiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
   axios.get(cityapiUrl).then(showWeather);
 }
@@ -135,6 +149,4 @@ celciusButton.addEventListener("click", celFormula);
 let fahrenheitButton = document.querySelector("#fahr-button");
 fahrenheitButton.addEventListener("click", fahrFormula);
 
-
 citySearch("Dallas");
-displayForecast();
