@@ -32,15 +32,6 @@ function formatDay(timestamp) {
   return days[day];
 }
 
-// Gather Position
-//function showPosition(corrdinates) {
-//let apiKey = "c93e97809431cb4a1503908d50079963";
-//let long = position.coords.longitude;
-//let lati = position.coords.latitude;
-//let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lati}&lon=${long}&appid=${apiKey}&units=imperial`;
-//axios.get(apiUrl).then(displayForecast);
-//}
-
 //forecast
 function displayForecast(response) {
   let forecast = response.data.daily;
